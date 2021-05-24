@@ -8,19 +8,30 @@ import FilterIcon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 import PortableCard from './components/portableCard';
 import Modal from 'react-native-modal';
-
+import RBSheet from "react-native-raw-bottom-sheet";
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+var radio_props = [
+    { label: 'Name--A to Z', value: 0 },
+    { label: 'Name--Z to A', value: 1 },
+    { label: 'Status--A to Z', value: 2 },
+    { label: 'Status--Z to A', value: 3 },
+    { label: 'Equipment Type--A to Z', value: 4 },
+    { label: 'Equipment Type--Z to A', value: 5 },
+];
 class PortableScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isModalVisible: false,
-            isModalVisibleDetails: false
+            isModalVisibleDetails: false,
+            value: 0,
         };
     }
     componentDidMount() {
         console.log(this.props, "state", this.state)
 
     }
+
 
     toggleModal = () => {
         this.setState({ isModalVisible: !this.state.isModalVisible })
@@ -42,7 +53,9 @@ class PortableScreen extends Component {
                 />
                 <View style={styles.bodyContainer}>
                     <View style={styles.optionHeading}>
-                        <TouchableOpacity style={[styles.headerOptions]}>
+                        <TouchableOpacity
+                            onPress={() => this.RBSheet.open()}
+                            style={[styles.headerOptions]}>
                             {shortbyIcon}
                             <Text style={styles.optionTxt}>Sort by</Text>
                         </TouchableOpacity>
@@ -197,6 +210,44 @@ class PortableScreen extends Component {
                         </View>
                     </View>
                 </Modal>
+                <RBSheet
+                    ref={ref => {
+                        this.RBSheet = ref;
+                    }}
+                    height={270}
+                    openDuration={250}
+                    customStyles={{
+                        container: {
+                            // justifyContent: "center",
+                            // alignItems: "center"
+                        }
+                    }}
+                >
+                    <View style={{ flex: 1, justifyContent: 'space-between', paddingBottom: 20 }}>
+                        <View
+                            style={{ flexDirection: 'row',
+                            alignItems:'center', paddingHorizontal:10, height: 25, backgroundColor: '#212121' }}>
+                            {shortbyIcon}
+                            <Text style={{ fontSize: 12, color: '#ffffff' }}>Sort by</Text>
+                        </View>
+                        <View style={{ paddingHorizontal: 10 }}>
+
+                            <RadioForm
+                                radio_props={radio_props}
+                                initial={0}
+                                buttonColor={'#212121'}
+                                buttonOuterColor={'#212121'}
+                                buttonInnerColor={'#212121'}
+                                selectedButtonColor={'#212121'}
+                                onPress={(value) => { this.setState({ value: value }) }}
+                            />
+                        </View>
+
+
+
+                    </View>
+
+                </RBSheet>
             </View>
         );
     }
@@ -355,7 +406,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5
 
     },
-    innerItems:{
-        flex:1
+    innerItems: {
+        flex: 1
     }
 })
