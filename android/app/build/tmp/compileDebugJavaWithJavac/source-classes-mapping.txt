@@ -1,0 +1,14 @@
+com/verizonapp/BuildConfig.java
+ com.verizonapp.BuildConfig
+com/verizonapp/MainActivity.java
+ com.verizonapp.MainActivity
+com/verizonapp/MainApplication.java
+ com.verizonapp.MainApplication
+ com.verizonapp.MainApplication$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/verizonapp/ReactNativeFlipper.java
+ com.verizonapp.ReactNativeFlipper
+ com.verizonapp.ReactNativeFlipper$1
+ com.verizonapp.ReactNativeFlipper$2
+ com.verizonapp.ReactNativeFlipper$2$1
